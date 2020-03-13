@@ -7,6 +7,9 @@
 *.pdf
 *.do
 *.zip
+*.out
+*.toc
+*.synctex
 
 # Ordner
 /.RProj.user/*
