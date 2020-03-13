@@ -6,39 +6,6 @@ options(encoding="UTF-8")
 
 fragen <- unique(na.omit(str_extract(fb, "^[A-Z][0-9][[:alnum:]\\_]*")))
 
-# Funktionen: get.questions (get.qu) und get.langkurz (get.lk)----
-
-get.qu <- function(names) {
-  
-  # Erster Schritt: Variablen am Unterstrich splitten
-  var <- unlist(str_split(names, "\\_"))
-  # Wenn EIN Element einer Frage entspricht: ablegen (wichtig für "Order")
-  frage <- fragen[tolower(fragen) == tolower(var[which(var %in% fragen)])]
-  
-  # Jetzt strings zusammenpacken; 
-  # der längste String, der einer Frage entspricht, ist korrekt.
-  for(i in 1:length(var)) {
-    
-    var_c <- paste(var[1:i], collapse="_")
-    
-    # nur wenn ein zusammengesetzter String einer Frage entspricht:
-    if(any(tolower(var_c) %in% tolower(fragen))) {
-      frage <- fragen[tolower(fragen) == tolower(var_c[which(var_c %in% fragen)])]
-    }
-    
-  }
-  
-  # Ergebnis: Entweder eine Frage oder NA
-  if(length(frage) > 0) { return(frage) } else { return(NA) }
-  
-}
-
-get.lk <- function(x, y, value) { 
-  
-  return(all(is.na(x[y==value])==T))
-  
-}
-
 # Link zwischen Variablen und Fragen im Fragebogen------------------------------
 fb_link <- data.frame(vars = names(rawdat), 
                       fragen = unlist(sapply(names(rawdat), get.qu)), 
@@ -58,7 +25,7 @@ for(i in seq_along(fb)) {
   # Schritt 1: Trennen (Fragen, Items, Codes, Programmierhinweise...)
   if(str_detect(fb[i], "[^:]+")) {
     fb_df[i,1] <- str_extract(fb[i], "[^:]+:")
-    fb_df[i,2] <- str_remove(fb[i], "[^:]+: ")  
+    fb_df[i,2] <- str_remove(str_remove(fb[i], "[^:]+:"), "^ ")  
   }
   
   # Schritt 2: Blöcke erkennen und abtrennen!

@@ -1,39 +1,21 @@
-# Unvollständige Labels nachreichen
+# ist die 1 gelabelt und die 2 nicht?
 
 for(b in names(rawdat)) {
- 
-  # check, ob es Valueabels gibt
-  if(is.null(attr(rawdat[[b]], "labels")) == FALSE) {
+  
+  labs <- attributes(rawdat[[b]])$labels
+  
+  # ist die 1 gelabelt und die 2 nicht?
+  check <- 1 %in% labs & !(2 %in% labs) &
+    length(labs[!str_detect(names(labs), "verw|weiß|nicht zu")]) > 1
+  
+  if(identical(check, T)) {
     
-    # Labels extrahieren
-    valuelabels <- attr(rawdat[[b]], "labels")
+    # Index vom zweiten zum letzten Wert der Skala (-1)
     
-    # alle Werte sortieren
-    values <- na.omit(unique(sort(rawdat[[b]])))
-    
-    # Label für den ersten Wert, z.B. "1"
-    firstvalue <- valuelabels[valuelabels == values[1]]
-    
-    # Ist der erste Wert benannt und ein weiterer nicht?
-    if(
-      length(firstvalue) == 1 & 
-      length(values) > length(valuelabels)
-      ) {
-      
-      unnamed <- which(!(values %in% valuelabels))
-      valuelabels <- c(valuelabels, unnamed)
-      names(valuelabels)[valuelabels==unnamed] <- as.character(unnamed)
-      valuelabels <- sort(valuelabels)
-      
-      attr(rawdat[[b]], "labels") <- valuelabels
-      attr(attr(rawdat[[b]], "labels"), "names") <- names(valuelabels)
-      
-      print(b)
-      
-    }
+    index <- 2:(attributes(rawdat[[b]])$labels[2]-1)
+    names(index) <- index
+    attributes(rawdat[[b]])$labels <- c(labs[1], index, labs[2:length(labs)])
     
   }
-   
+  
 }
-
-rm(list=c("b", "firstvalue", "unnamed", "valuelabels", "values"))

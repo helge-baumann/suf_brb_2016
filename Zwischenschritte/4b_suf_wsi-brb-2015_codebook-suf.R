@@ -349,6 +349,38 @@ for(i in 1:nrow(Codebook_SUF)) {
 Codebook_SUF[,1] <- 
   str_replace(Codebook_SUF[,1], "Interviewdauer", "Interview\\-dauer")
 
+# subsections()
+num1 <- 0
+num2 <- 0
+index <- which(!is.na(Codebook_SUF[,1]))
+vars <- str_remove(str_remove(Codebook_SUF[index,1], "\\\\textbf\\{"), "\\}.*")
+var_ref <- vars[1]
+ind_ref <- index[1]
+
+for(b in vars) {
+  
+  num1 <- num1+1
+  num2 <- num2+1
+  
+  firstletter <- str_extract(b, "^.")
+  firstletterbefore <- str_extract(vars[num1-1], "^.")
+  
+  if(identical(firstletter == firstletterbefore, F) & num2 > 30) {
+    
+    Codebook_SUF[ind_ref+1,2] <- 
+      paste0(
+        "\\protect\\subsection[Variablen ",
+        var_ref, " bis " , vars[num1], "]", "{}"
+      )
+    
+    num2 <- 0
+    var_ref <- vars[num1+1]
+    ind_ref <- index[num1+1]
+  }
+  
+}
+  
+
 # in ein xtable überführen (Latex-Format)
 Codebook_tex <- xtable(Codebook_SUF, digits=0)
 

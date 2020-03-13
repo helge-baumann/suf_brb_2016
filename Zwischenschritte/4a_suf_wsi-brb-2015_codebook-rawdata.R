@@ -188,6 +188,36 @@ Codebook_Rawdata[,1] <-
 Codebook_Rawdata[,2] <- str_replace(Codebook_Rawdata[,2], fixed("e+05"), "00000")
 Codebook_Rawdata[,3] <- str_replace(Codebook_Rawdata[,3], fixed("e+05"), "00000")
 
+# subsections()
+num1 <- 0
+num2 <- 0
+index <- which(!is.na(Codebook_Rawdata[,1]))
+vars <- str_remove(str_remove(Codebook_Rawdata[index,1], "\\\\textbf\\{"), "\\}.*")
+var_ref <- vars[1]
+ind_ref <- index[1]
+
+for(b in vars) {
+  
+  num1 <- num1+1
+  num2 <- num2+1
+  
+  firstletter <- str_extract(b, "^.")
+  firstletterbefore <- str_extract(vars[num1-1], "^.")
+  
+  if(identical(firstletter == firstletterbefore, F) & num2 > 30) {
+    
+    Codebook_Rawdata[ind_ref+1,2] <- 
+      paste0(
+        "\\protect\\subsection[Variablen ",
+        var_ref, " bis " , vars[num1-1], "]", "{}"
+      )
+    
+    num2 <- 0
+    var_ref <- vars[num1]
+    ind_ref <- index[num1]
+  }
+  
+}
 # in ein xtable überführen (Latex-Format)
 Codebook_tex <- xtable(Codebook_Rawdata, digits=0)
 
