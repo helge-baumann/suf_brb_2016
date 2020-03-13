@@ -1,0 +1,60 @@
+\section{Zum Lesen dieses Datenhandbuchs}
+
+Das vorliegende Datenhandbuch verfolgt das Ziel, Nutzern des Scientific Use Files (SUF) der WSI-Be\-triebs\-rä\-te\-be\-fra\-gung 2015 nachvollziehbar darzulegen, (1) welche Variablen mit welchen Ausprägungen im SUF enthalten sind und (2) aus welchen Fragen bzw. (Original-)Variablen dieses Scientific Use File gespeist wurde. Damit ist der Datengenerierungsprozess beschrieben; für Informationen zum Daten\textit{erhebungs}prozess sowie zur Methodik der Studie lesen Sie bitte die verfügbaren Methodenberichte.
+
+Das Scientific Use File wird in zwei Schritten erzeugt:
+
+\begin{enumerate}
+
+\item Der \hyperref[kap_fragebogen]{Fragebogen} dokumentiert das CATI\footnote{\textit{Computer Assisted Telephone Interviewing}}-Befragungsinstrument, das vom 27.01. bis zum 30.04.2015 eingesetzt wurde. Diesem Fragebogen sind alle Fragen im Wortlaut, sämtliche Antwortmöglichkeiten sowie ergänzende Interviewer- und Programmierhinweise zu entnehmen. Für jede Frage sind in der rechten Spalte alle aus der Frage gewonnenen Variablen des \glqq Rohdatensatzes\grqq\xspace verlinkt:
+
+\item Der \hyperref[kap_rohdaten]{Rohdatensatz} ist der unveränderte Datensatz, den das WSI nach Abschluss der Befragung am 18.05.2015 (Befragungsdaten) bzw. am 25.06.2015 (Gewichtungsfaktoren) erhielt. Es können alle in ihm enthaltenen Labels,  Werte(bereiche) sowie die entsprechenden  Fallzahlen entnommen werden. 
+
+\end{enumerate}
+
+Das Scientific Use File ist eine modifizierte Form des Rohdatensatzes. Die Modifikationen betreffen zum Teil die Anonymität der befragten Personen, Betriebsratsgremien, Betriebe sowie Unternehmen, sind aber zum gro?en Teil auch einer verbesserten Nutzerfreundlichkeit geschuldet. Folgende Veränderungen wurden vom Rohdatensatz zum Scientific Use File vorgenommen: 
+
+\begin{enumerate}
+
+\item \hyperref[var_miss]{Missing Labels} wurden umkodiert.
+\item Angaben, die aus mehreren Variablen gewonnen werden müssen (z.B. Anteilswerte), wurden \hyperref[var_generiert]{generiert}.
+\item Angaben, die die Anonymität der Personen und Betriebe gefährden, wurden \hyperref[var_kategorisiert]{vergröbert}.
+\item Zielpersonen-, Methodeninformationen sowie Variablen, aus denen Informationen generiert oder vergröbert wuden, wurden \hyperref[var_geloescht]{gelöscht}.
+\item Gewichtungsfaktoren sowie eine Interviewerkennung  wurden \hyperref[var_ergaenzt]{ergänzt}.
+
+\end{enumerate}
+
+Es kann im Einzelnen nachvollzogen werden, welche Variablen aus dem Rohdatensatz in welcher Form in das Scientific Use File Einzug erhalten haben bzw. entfernt wurden. Dabei ist dieses Dokument mehrfach verlinkt:
+
+\begin{itemize}
+
+\item Von jeder Frage des Fragebogens ausgehend kann in der rechten Spalte nachvollzogen werden, welche Variablen aus der Frage für den Rohdatensatz erzeugt wurden. 
+
+\item Von jeder Variable des Rohdatensatzes ausgehend kann nachvollzogen werden, (1) aus welcher Frage sie gespeist wurde (vorletzte Spalte) und (2) ob und unter welchem Namen die Variable im Scientific Use File enthalten ist (letzte Spalte).
+
+\item Von den generierten Variablen ausgehend kann nachvollzogen werden, aus welchen urspr?nglichen Variablen und welchen Werten die neuen, generierten Variablen erzeugt wurden. 
+
+\item Die gelöschten und vergröberten Variablen sind mit dem Codebuch im Rohdatensatz verlinkt, die ergänzten Variablen mit dem Codebuch des Scientific Use Files.
+
+\item Für jede Variable des Scientific Use Files kann in der letzten Spalte nachvollzogen werden, aus welcher/welchen ursprünglichen Frage(n) die Variable gespeist ist. 
+
+\end{itemize}
+
+In übersichtlicher Weise kann die Verlinkung des Dokuments also in folgenden Schritten nachvollzogen werden:\vspace*{0.5cm}
+
+\begin{tikzpicture}[->,>=stealth',auto,node distance=6.75cm, minimum width=4cm,
+minimum height=2cm, 
+  thick,main node/.style={rectangle,draw,font=\Large\bfseries}]
+
+  \node[main node] (1) {Fragebogen};
+  \node[main node] (2) [right of=1] {Rohdatensatz};
+  \node[main node] (3) [right of=2] {SUF};
+
+  \path[every node/.style={font=\sffamily\small}]
+    (1) edge node [right] {} (2)
+      (2) edge node [left] {} (1)
+    (2) edge node [right] {} (3)
+    (3) edge[bend left] node [right] {} (1);
+\end{tikzpicture}
+
+Je nach Arbeitsweise kann sowohl vom Datensatz als auch vom Fragebogen ausgehend gearbeitet werden: Wenn Sie wissen möchten, wie eine Variable im Scientific Use File erhoben wurde, klicken Sie auf die verlinkte Frage im Codebuch und Sie gelangen zurück zur ursprünglichen Frage. Wenn Sie sich zunächst den Fragebogen erarbeiten und wissen möchten, zu welchen Variablen eine bestimmte Frage führt, gelangen Sie zunächst zu den Variablen des Rohdatensatzes und können von dort prüfen, ob die Sie interessierenden Variablen im Scientific Use File in der Originalversion enthalten sind, modifiziert wurden (generiert oder vergröbert) oder ob sie gelöscht wurden. 

@@ -1,0 +1,124 @@
+\section{Vom Rohdatensatz zum Scientific Use File}
+
+
+
+\subsection{Missing Labels}\label{var_miss}
+
+Die \glqq ung?ltigen\grqq\xspace bzw. fehlenden Werte (\textit{missing values}) des Rohdatensatzes wurden zwecks Nutzerfreundlichkeit ?berarbeitet. Zum einen wurden die bereits gelabelten Werte f?r \glqq Wei? nicht\grqq , \glqq verweigert\grqq\xspace und \glqq trifft nicht zu\grqq\xspace auf negative Werte gesetzt, um Berechnungen zu vereinfachen. Zum anderen wurden ungelabelte, fehlende Werte dahingehend differenziert, ob sie durch die \hyperref[langkurz]{Fragebogenversion} oder eine etwaige Filterf?hrung fehlen (die Filterf?hrungen k?nnen durch den Fragebogen nachvollzogen werden). Folgende Transformationen wurden vorgenommen:
+
+\begin{itemize}
+	\item \glqq Wei? nicht\grqq -Angaben:
+	\begin{itemize}
+	\item im Rohdatensatz 8, 98, 998, 9998, 999998, 999998 
+	\item im Scientific Use File durchgehend -8
+	\end{itemize}
+	\item Verweigerungen:
+	\begin{itemize}
+	\item im Rohdatensatz 7, 97, 997, 9997, 999997, 999997 
+	\item im Scientific Use File durchgehend -7
+	\end{itemize}
+	\item \glqq Trifft nicht zu\grqq -Angaben:
+	\begin{itemize}
+	\item im Rohdatensatz 6
+	\item im Scientific Use File durchgehend -6
+	\end{itemize}
+	\item \glqq Missing durch Filterf?hrung\grqq : -5
+	\item \glqq Item in Fragebogenversion nicht erhoben\grqq : -4
+
+\end{itemize}
+
+\subsection{Generierte Variablen}\label{var_generiert} 
+
+Im Folgenden wird der Erzeugungsprozess generierter Variablen beschrieben. Dabei kann im Einzelnen
+nachvollzogen werden, durch welche Ursprungsvariablen bzw. welche Werte dieser Ursprungsvariablen die neuen, generierten
+Variablen zustande kommen. Generiert wurden solche Variablen, die sich aus mehreren Fragen zusammensetzen. Dies betrifft einerseits Anteilswerte von Besch?ftigtenstrukturangaben, die aus der Division von  der jeweiligen Besch?ftigtenstruktur und der Betriebsgr??e (Variable \hyperref[var:D1]{D1}) generiert wird. Dies betrifft andererseits die Struktur des Betriebsrates, f?r die die jeweils erhobenen Angaben (z.B., wie viele Frauen es im Betriebsrat gibt) durch die Gr??e des Betriebsrates (Variable \hyperref[var:M3]{M3}) dividiert wurden. Diese Variablen sind im Datensatz des Scientific Use Files durch das Suffix \glqq \_gen \grqq\xspace gekennzeichnet, auch ihr Variablenlabel enth?lt einen entsprechenden Hinweis (\grqq generierte Variable\grqq )
+
+\begin{longtable}{!{\color{black}\vline width 1pt} L{2.5cm} !{\color{black}\vline width 1pt} L{9.125cm} | L{5.125cm} !{\color{black}\vline width 1pt}  }
+	
+	%\caption*{Codebuch der WSI-Betriebsr?tebefragung 2015: Originaldatensatz}\\
+	%\multicolumn{5}{l}{\textsc{WSI-Datenzentrum} \hfilll \textnormal{Codebuch der WSI-Betriebsr?tebefragung 2015: Rohdatensatz}} \\
+	\toprule
+		\textbf{Variable} & \textbf{WENN:} & \textbf{DANN:}  \\ 
+	\midrule
+	\endfirsthead
+	%\caption*{Codebuch der WSI-Betriebsr?tebefragung 2015: Originaldatensatz}\\
+	%\multicolumn{5}{l}{\textsc{WSI-Datenzentrum} \hfilll \textnormal{Codebuch der WSI-Betriebsr?tebefragung 2015: Rohdatensatz}} \\
+	\toprule
+		\textbf{Variable} & \textbf{WENN:} & \textbf{DANN:}  \\ 
+	\midrule
+	\endhead
+	
+	\midrule
+	
+	%\multicolumn{5}{r}{\textit{Seite \thepage\ von \pageref{LastPage}}} \\
+	\endfoot
+	\bottomrule
+	\endlastfoot
+		
+	\input{Generierte_Variablen.tex}
+	
+\end{longtable}
+
+\subsection{Vergr?berte Variablen}\label{var_kategorisiert}
+
+Einige Variablen des Rohdatensatzes enthalten einzelne Angaben, die die Anonymit?t des Betriebes bzw. des Betriebsrates gef?hrden. Aus diesen Variablen wurden klassierte Daten generiert. Diese Variablen sind im Datensatz des Scientific Use Files durch das Suffix \glqq \_kat \grqq\xspace gekennzeichnet, auch ihr Variablenlabel enth?lt einen entsprechenden Hinweis (\grqq vergr?bert\grqq ). Dies betrifft im Einzelnen:
+
+\begin{enumerate}
+
+\item \hyperref[var:D1]{D1}: Anzahl der Besch?ftigten im Betrieb 
+\item \hyperref[var:I7]{I7}: H?he des Krankenstandes am 01.12.2014 in Prozent
+\item \hyperref[var:M1]{M1}: Existenzdauer des Betriebsrats in Jahren
+\item \hyperref[var:M2]{M2}: Wahljahr des Betriebsrats
+\item \hyperref[var:M3]{M3}: Anzahl der Betriebsratsmitglieder
+\item \hyperref[var:M13]{M13}: Alter des Betriebsratsvorsitzenden
+\item \hyperref[var:R1a]{R1a}: Anzahl der Besch?ftigten im Gesamtunternehmen
+
+\end{enumerate}
+
+\subsection{Gel?schte Variablen}\label{var_geloescht}
+
+Dem Scientific Use File wurden gegen?ber dem Rohdatensatz eine Reihe von Variablen entnommen. Damit wird zun?chst die Anonymit?t der Zielpersonen gew?hrleistet, deren Angaben vor allem zur methodischen Qualit?tssicherung der Fragen erhoben werden. Da es sich jedoch um eine Gremienbefragung handelt, f?r die Zielperson lediglich als Repr?sentant fungiert, sind diese Angaben f?r die inhaltliche Forschung nicht notwendig. Auch die Entfernung offener Angaben dient, da sich darunter exakte Wortlaute finden, der Anonymisierung des Datensatzes. 
+
+Weiter wurden Variablen zur ?bersichtlichkeit des Datensatzes entnommen. Darunter fallen die Methodenvariablen (z.B. die Reihenfolge, in der gewisse Fragen eingespielt wurden), aber auch alle Variablen, die zu \hyperref[var_generiert]{generierten} oder \hyperref[var_kategorisiert]{kategorisierten} Variablen weiterverarbeitet wurden.
+
+\begin{longtable}{!{\color{black}\vline width 1pt} L{2.5cm} !{\color{black}\vline width 1pt} L{2.5cm} | L{11.75cm} !{\color{black}\vline width 1pt}  }
+	
+	%\caption*{Codebuch der WSI-Betriebsr?tebefragung 2015: Originaldatensatz}\\
+	%\multicolumn{5}{l}{\textsc{WSI-Datenzentrum} \hfilll \textnormal{Codebuch der WSI-Betriebsr?tebefragung 2015: Rohdatensatz}} \\
+	\toprule
+	\textbf{L?schgrund} & \textbf{Variable} & \textbf{Variablenbezeichnung}  \\ 
+	\midrule
+	\endfirsthead
+	%\caption*{Codebuch der WSI-Betriebsr?tebefragung 2015: Originaldatensatz}\\
+	%\multicolumn{5}{l}{\textsc{WSI-Datenzentrum} \hfilll \textnormal{Codebuch der WSI-Betriebsr?tebefragung 2015: Rohdatensatz}} \\
+	\toprule
+		\textbf{L?schgrund} & \textbf{Variable} & \textbf{Variablenbezeichnung}  \\ 
+	\midrule
+	\endhead
+	
+	\midrule
+	
+	%\multicolumn{5}{r}{\textit{Seite \thepage\ von \pageref{LastPage}}} \\
+	\endfoot
+	\bottomrule
+	\endlastfoot
+		
+	\input{Geloeschte_Variablen.tex}
+	
+\end{longtable}
+
+\subsection{Erg?nzte Variablen}\label{var_ergaenzt}
+
+Dem Scientific Use File wurden vier Gewichtungsfaktoren sowie eine Interviewerkennung hinzugef?gt. Die Herleitung der Gewichtungsfaktoren entnehmen Sie bitte dem Methodenbericht der WSI-Betriebsr?tebefragung 2015. Dabei sollten Sie insbesondere ber?cksichtigen, dass Sie, je nachdem, ob Sie Fragen der Kurz- oder Langversion des Fragebogens auswerten, unterschiedliche Gewichtungsfaktoren verwenden m?sssen. Zudem ist zu beachten, dass den Gewichtungsfaktoren unterschiedliche Grundgesamtheiten zugrunde liegen.\footnote{Das WSI empfiehlt die Verwendung der Gewichtungsfaktoren f?r die Grundgesamtheit der Betriebe mit Betriebsrat.} Mithilfe der Interviewerkennung k?nnen Clusterungseffekte z.B. in Mehrebenenanalysen ber?cksichtigt werden. Die erg?nzten Variablen und ihre Labels lauten:
+
+\begin{enumerate}
+
+\item \hyperref[var:suf:gewab:k]{gewab\_k}: Gewichtungsfaktor Grundgesamtheit aller Betriebe (Kurzversion)
+\item \hyperref[var:suf:gewab:l]{gewab\_l}: Gewichtungsfaktor Grundgesamtheit aller Betriebe (Langversion)
+\item \hyperref[var:suf:gewbr:k]{gewbr\_k}: Gewichtungsfaktor Grundgesamtheit Betriebe mit Betriebsrat (Kurzversion)
+\item \hyperref[var:suf:gewbr:l]{gewbr\_l}: Gewichtungsfaktor Grundgesamtheit Betriebe mit Betriebsrat (Langversion)
+\item \hyperref[var:suf:internr:n]{internr\_n}: Interviewernummer
+\item \hyperref[var:suf:westost]{westost}: WESTOST
+\item \hyperref[var:suf:branche10]{branche10}: Branche (WZ 2008)
+
+\end{enumerate}

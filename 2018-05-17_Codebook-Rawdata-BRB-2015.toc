@@ -1,0 +1,32 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\nonumberline Zum Lesen dieses Datenhandbuchs}{1}{section*.2}% 
+\contentsline {section}{\nonumberline Fragebogen der WSI-Betriebsrätebefragung 2015}{3}{section*.3}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block A:} Screening}{3}{section*.4}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block C0:} Unternehmensstruktur}{8}{section*.16}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block G:} Beschäftigung des Betriebsrates mit betrieblichen Problemen}{9}{section*.23}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block C:} Betriebsstruktur}{10}{section*.26}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block D:} Beschäftigtenangaben}{12}{section*.35}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block E:} Wirtschaftliche Lage}{20}{section*.62}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block F:} Älterwerden, Vorruhestand}{21}{section*.65}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block H:} Arbeitszeit}{22}{section*.72}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block I:} Arbeitsorganisation, -bedingungen und Gesundheit}{26}{section*.92}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block J:} Lohn und Entgelt}{31}{section*.112}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block K:} Tarifbindung UND Betriebsvereinbarungen}{34}{section*.124}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block L:} Arbeitsniederlegungen}{42}{section*.149}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block M:} Allgemeine Angaben zum Betriebsrat}{43}{section*.153}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block N:} Verhältnis des Betriebsrates zum Arbeitgeber}{47}{section*.176}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block O:} Verhältnis des Betriebsrates zu den Gewerkschaften}{49}{section*.187}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block P:} Verhältnis zwischen Betriebsrat und Belegschaft, Gewerkschaft und Arbeitgeber}{49}{section*.190}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block Q:} Angaben zur Zielperson}{51}{section*.196}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block R:} Unternehmensstruktur}{53}{section*.205}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block S:} Panelfrage}{54}{section*.211}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block T:} Aus Stichprobendatei zu übermittelnde Angaben}{55}{section*.217}% 
+\contentsline {subsection}{\nonumberline \parbox {\mylength }{Block U:} Paradaten}{56}{section*.222}% 
+\contentsline {section}{\nonumberline Codebuch der WSI-Betriebsrätebefragung 2015, Rohdatensatz}{57}{section*.230}% 
+\contentsline {section}{\nonumberline Vom Rohdatensatz zum Scientific Use File}{138}{section*.715}% 
+\contentsline {subsection}{\nonumberline Missing Labels}{138}{section*.716}% 
+\contentsline {subsection}{\nonumberline Generierte Variablen}{138}{section*.717}% 
+\contentsline {subsection}{\nonumberline Vergr?berte Variablen}{143}{section*.751}% 
+\contentsline {subsection}{\nonumberline Gel?schte Variablen}{143}{section*.752}% 
+\contentsline {subsection}{\nonumberline Erg?nzte Variablen}{148}{section*.753}% 
+\contentsline {section}{\nonumberline Codebuch der WSI-Betriebsrätebefragung 2015, Scientific Use File}{149}{section*.754}% 
