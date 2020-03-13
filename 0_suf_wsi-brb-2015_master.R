@@ -12,7 +12,7 @@ p_load("styler", "labelled", "stringr", "here", "xtable", "tools", "dplyr",
        "haven", "stringi") 
 
 # Schritte in ./Zwischenschritte ausführen
-lapply(dir("./Zwischenschritte", full.names=T), source, encoding="UTF-8")
+sapply(dir("./Zwischenschritte", full.names=T), source, encoding="UTF-8")
 
 # SessionInfo erzeugen ---------------------------------------------------------
 dir.create("./sessionInfo", showWarnings=F)
