@@ -1,5 +1,5 @@
 ############
-# Masterfile zur Erzeugung eines SUF der WSI-Betriebsraetebefragung 2015
+# Masterfile zur Erzeugung eines SUF der WSI-Betriebsraetebefragung 2016
 # Ersteller: Helge Emmler, WSI
 # Letztes Update: 17.03.2020
 ############
@@ -17,7 +17,7 @@ p_load("stringr", "xtable", "dplyr", "haven", "stringi", "filesstrings",
 source("./R_Funk/funktionen_suf.R", encoding="UTF-8")
 
 # Schritte in ./Zwischenschritte ausführen--------------------------------------
-n <- 1:12
+n <- 1:6
 sapply(dir("./Zwischenschritte", full.names=T)[n], source, encoding="UTF-8")
 
 # SessionInfo erzeugen ---------------------------------------------------------

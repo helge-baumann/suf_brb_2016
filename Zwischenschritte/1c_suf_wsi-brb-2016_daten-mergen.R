@@ -1,7 +1,6 @@
 # Gewichtungs- und Interviewerdaten mergen
 
 # Gewichte----
-gew <- gew[,c("lfd", "gewab_k", "gewab_l", "gewbr_k", "gewbr_l")]
 sufdat <- left_join(rawdat, gew, by="lfd")
 
 # Interviewerdaten---- 

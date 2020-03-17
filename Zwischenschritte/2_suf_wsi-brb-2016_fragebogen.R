@@ -1,19 +1,18 @@
-starttime <- Sys.time()
-
 # Fragebogen einlesen (von Word als .txt, danach bearbeitet)--------------------
 options(encoding="Windows-1252")
-fb <- readLines("./Hintergrund/Fragebogen_Betriebsrätebefragung_2015_text.txt")
+fb <- readLines(
+  "./Input/Fragebogen/Fragebogen_Betriebsrätebefragung_2016_text.txt")
 fb <- stri_enc_toutf8(fb)
 options(encoding="UTF-8")
+fb <- str_replace_all(fb, "\t", " ")
 
 fragen <- unique(na.omit(str_extract(fb, "^[A-Z][0-9][[:alnum:]\\_]*")))
 
 # Link zwischen Variablen und Fragen im Fragebogen------------------------------
-fb_link <- data.frame(vars = names(rawdat), 
-                      fragen = unlist(sapply(names(rawdat), get.qu)), 
-                      kurz=as.integer(unlist(sapply(
-                        rawdat, get.lk, y=rawdat$langkurz, value=2)))
-)
+fb_link <- data.frame(
+  vars = names(rawdat), 
+  fragen = unlist(sapply(names(rawdat), get.qu))
+  )
 
 # Fragebogen als Data Frame-----------------------------------------------------
 fb_df <- data.frame(Frage = character(length=length(fb)), 
@@ -102,19 +101,6 @@ for(i in which(!is.na(fb_df[,1]))) {
 
 midrules <- na.omit(midrules)[-1]
 
-# Farbige Zeilen----
-switch <- 0
-
-for(i in seq_along(fb)) {
-  
-  x <- str_extract(fb[i], "^[A-Z][0-9][[:alnum:]\\_]*")
-  
-  if(x %in% na.omit(fb_link$fragen[fb_link$kurz == 1])) switch <- 1
-  if(x %in% na.omit(fb_link$fragen[fb_link$kurz == 0])) switch <- 0
-  if(switch == 1) fb_df[i,1] <- paste0("\\rowcolor[gray]{.9}", fb_df[i,1])
-  
-}
-
 # Hyperlinks für Filterführungen----
 for(i in 
     which(str_detect(
@@ -145,8 +131,8 @@ fb_tex <- xtable(fb_df, digits=0)
 
 
 head <- paste(
-  c(paste0("\\section[Fragebogen der WSI-Betriebsrätebefragung 2015]",
-           "{Fragebogen der WSI-Betriebsrätebefragung 2015, Stand: 12.01.2015}",
+  c(paste0("\\section[Fragebogen der WSI-Betriebsrätebefragung 2016]",
+           "{Fragebogen der WSI-Betriebsrätebefragung 2016, Stand: 19.01.2016}",
            "\\label{kap_fragebogen}"),
     paste0("\\begin{longtable}{",
            "!{\\color{black}\\vline width 1pt}  L{2cm}",
@@ -158,11 +144,6 @@ head <- paste(
     rep("\\midrule", 2), "\\endfirsthead", "\\toprule",
     "\\textbf{Schlüssel} & \\textbf{Text / Anweisung}  & \\textbf{Variablen} \\\\ ",
     rep("\\midrule", 2), "\\endhead", rep("\\midrule", 2),
-    paste0("\\multicolumn{1}{l}{\\textit{Erläuterung:}} &",
-           "\\multicolumn{2}{l}{\\cellcolor[gray]{.9}",
-           "Bereich grau hinterlegt: Frage wurde nur in der ",
-           "\\hyperref[langkurz]{Kurzversion} des Fragebogens erhoben}\\\\"
-    ),
     paste0("\\multicolumn{1}{l}{} & \\multicolumn{2}{l}{\\textcolor{red}{",
            "\\glqq INT\\grqq\\xspace = Interviewerhinweis/-anweisung}} \\\\"),
     paste0("\\multicolumn{1}{l}{} &	\\multicolumn{2}{l}{\\textcolor{red}{",
@@ -184,7 +165,5 @@ table <- print.xtable(fb_tex,
 con <- "./Berichte/Codebook/C_Fragebogen.tex"
 writeLines(c(head, table, "\\end{longtable}"), con=con)
 
-endtime <- Sys.time()
-endtime - starttime
 
 

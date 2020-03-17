@@ -5,7 +5,7 @@ for(b in names(rawdat)) {
   labs <- attributes(rawdat[[b]])$labels
   
   # ist die 1 gelabelt und die 2 nicht?
-  check <- 1 %in% labs & !(2 %in% labs) &
+  check <- 1 %in% labs & !(2 %in% labs) & !(0 %in% labs) &
     length(labs[!str_detect(names(labs), "verw|weiß|nicht zu")]) > 1
   
   if(identical(check, T)) {

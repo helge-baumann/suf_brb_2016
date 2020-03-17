@@ -2,8 +2,8 @@
 
 # für Link zwischen Roh und SUF----
 options(encoding="Windows-1252")
-fr_b <- read.table("./Hintergrund/bereinigung_suf.txt", sep="\t", header=T)[1:3]
-fr_b[,2] <- stri_enc_toutf8(fr_b[,2])
+#fr_b <- read.table("./Hintergrund/bereinigung_suf.txt", sep="\t", header=T)[1:3]
+#fr_b[,2] <- stri_enc_toutf8(fr_b[,2])
 options(encoding="UTF-8")
 
 Codebook_Rawdata <- data.frame(
@@ -144,7 +144,7 @@ for(i in 1:ncol(rawdat)) {
     } else {
       
       # numerische ungelabelte Var. (zB laufende Nummer)
-      if(!str_detect(attr(rawdat[[i]], "label"), "offen")) {
+      if(identical(!str_detect(attr(rawdat[[i]], "label"), "offen"), T)) {
         
         num <- num+1
       
