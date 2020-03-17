@@ -2,11 +2,67 @@
 
 moving <- function(path) {
   
-  files <- list.files(path, full.names=T, recursive=T)
+  files <- list.files(path, full.names=T, recursive=F)
+  # Unterordner ausklammern:
+  files <- setdiff(files, list.dirs(path, recursive=F))
   movers <- !str_detect(files, format(Sys.time(), "%Y-%m-%d"))
   file.move(files[movers], paste0(path, "/bin"))
   
 }
+# Doppelte Dateien löschen----
+
+delete.identical <- function(dir, automate=F, all=F, full=F) {
+  
+  functions <- list(
+    .sav = read_sav,
+    .dta = read_dta,
+    .pdf = file.size,
+    .txt = readLines
+  )
+  
+  change <- T
+  lauf <- 0
+  
+  while(change == T) {
+    
+    dateien <- rev(list.files(dir, full.names=T, recursive=full))
+    print(lauf <- lauf+1)
+    
+    for(b in dateien) {
+      
+      verblieben <- rev(list.files(dir, full.names=T, recursive=full))
+      index <- which(str_detect(verblieben, b))
+      endung <- str_extract(b, "\\.[:alnum:]{1,4}$")
+      same <- which(str_detect(verblieben, endung))
+      nextdat <- same[same > index][unique((1:length(same[same > index]))^all)]
+      
+      if(all(!is.na(nextdat))) {
+        
+        if(!(endung %in% names(functions))) functions[[endung]] <- file.size
+        dat1 <- functions[[endung]](verblieben[index])
+        
+        for(i in nextdat) {
+          dat2 <- functions[[endung]](verblieben[i])
+          
+          if(identical(dat1, dat2)) {
+            
+            if(automate & file.exists(b)) file.remove(b)
+            print(c(b, verblieben[i]))
+            
+          }
+          
+        }
+          
+      }
+      
+    }
+    
+    change <- length(verblieben) < length(dateien)
+    
+  }
+  
+}
+
 # Funktionen: get.questions (get.qu) und get.langkurz (get.lk)----
 
 get.qu <- function(names) {

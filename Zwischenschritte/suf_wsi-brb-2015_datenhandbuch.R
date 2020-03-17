@@ -2,23 +2,14 @@ texi2pdf(
   "./Berichte/Codebook/2018-05-17_Codebook-Rawdata-BRB-2015.tex",
   clean=T)
 
+zeit <- format(Sys.time(), "%Y-%m-%d_%H%M%S")
 # Bericht ablegen
 file.rename(
   "2018-05-17_Codebook-Rawdata-BRB-2015.pdf",
-  paste0(
-    format(Sys.time(), "%Y-%m-%d_%H%M%S"),
-    "_Codebook_WSI-Betriebsrätebefragung-2015.pdf"
-  )
+  paste0(zeit,"_Codebook_WSI-Betriebsrätebefragung-2015.pdf")
 )
-file.copy(
-  paste0(
-    format(Sys.time(), "%Y-%m-%d_%H%M%S"),
-    "_Codebook_WSI-Betriebsrätebefragung-2015.pdf"
-  ),
-   to =  "./Output/Berichte/",
-  overwrite=T
+file.move(paste0(zeit,"_Codebook_WSI-Betriebsrätebefragung-2015.pdf"), 
+                 "./Output/Berichte/")
+file.remove(
+  list.files()[which(str_detect(list.files(), "2018-05-17"))]
 )
-file.remove(paste0(
-  format(Sys.time(), "%Y-%m-%d_%H%M%S"),
-  "_Codebook_WSI-Betriebsrätebefragung-2015.pdf"
-))

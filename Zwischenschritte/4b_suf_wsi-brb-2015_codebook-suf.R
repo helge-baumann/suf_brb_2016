@@ -397,12 +397,40 @@ for(i in 1:nrow(Codebook_tex)) {
 midrules <- which(is.na(Codebook_SUF[,1])==F)-1
 midrules <- midrules[-1]
 
-print.xtable(Codebook_tex, 
+head <- paste(c(
+  "\\section{Codebuch der WSI-Betriebsrätebefragung 2015, Scientific Use File}",
+  paste0("\\begin{longtable}{| L{2.5cm} | L{8.25cm}",
+         "| C{1.5cm} | R{1.25cm} | C{2.25cm} |  }"
+  ),
+  "\\toprule",
+  paste0("\\textbf{Variable} & \\textbf{Variablenbez. und Wertelabel}",
+    "& \\textbf{Werte} &  \\textbf{n} & \\textbf{Frage} \\\\"
+  ), 
+  "\\midrule",
+  "\\endfirsthead",
+  "\\toprule",
+  paste0("\\textbf{Variable} & \\textbf{Bezeichnung und Labels}",
+    "& \\textbf{Werte} & \\textbf{n} & \\textbf{Frage} \\\\"
+  ),
+  "\\midrule",
+  "\\endhead",
+  "\\midrule",
+  "\\endfoot",
+  "\\bottomrule",
+  "\\endlastfoot"
+), collapse="\n")
+
+
+table <- print.xtable(Codebook_tex, 
              include.rownames=F,
              sanitize.text.function = identity,
              only.contents=T,
              booktabs=T,
              hline.after=midrules,
              include.colnames=F, 
-             file="./Berichte/Codebook/Codebook_SUF.tex"
+             print.results=F
 ) 
+
+con <- "./Berichte/Codebook/F_Codebook_SUF.tex"
+writeLines(c(head, table, "\\end{longtable}"), con=con)
+

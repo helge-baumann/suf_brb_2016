@@ -117,7 +117,7 @@ print.xtable(Loesch_tex,
              booktabs=T,
              hline.after=midrules,
              include.colnames=F, 
-             file="./Berichte/Codebook/Geloeschte_Variablen.tex"
+             file="./Berichte/Codebook/E2_Geloeschte_Variablen.tex"
 ) 
 
 #rm(list=setdiff(ls(), c("sufdat", "Gen", "Codebook_Rawdata", "rawdat")))

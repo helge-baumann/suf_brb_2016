@@ -225,12 +225,40 @@ Codebook_tex <- xtable(Codebook_Rawdata, digits=0)
 midrules <- which(is.na(Codebook_Rawdata[,1])==F)-1
 midrules <- midrules[-1]
 
-print.xtable(Codebook_tex, 
+head <- paste(c(
+  paste0("\\section{Codebuch der WSI-Betriebsrätebefragung 2015, Rohdatensatz}",
+  "\\label{kap_rohdaten}"
+  ),
+  paste0("\\begin{longtable}",
+  "{| L{2.45cm} | L{6cm} | C{1.5cm} | R{1cm} | C{2.25cm} | C{2.25cm} |}"
+  ),
+  "\\toprule",
+  paste0("\\textbf{Variable} & \\textbf{Bezeichnung und Labels}",
+  "& \\textbf{Werte} &  \\textbf{n} & \\textbf{Frage} & \\textbf{SUF} \\\\"
+  ),
+  "\\midrule",
+  "\\endfirsthead",
+  "\\toprule",
+  paste0("\\textbf{Variable} & \\textbf{Bezeichnung und Labels}",
+  "& \\textbf{Werte} & \\textbf{n} & \\textbf{Frage} & \\textbf{SUF} \\\\"
+  ),
+  "\\midrule",
+  "\\endhead",
+  "\\midrule",
+  "\\endfoot",
+  "\\bottomrule",
+  "\\endlastfoot"),
+  collapse="\n")
+
+table <- print.xtable(Codebook_tex, 
              include.rownames=F,
              sanitize.text.function = identity,
              only.contents=T,
              booktabs=T,
              hline.after=midrules,
              include.colnames=F, 
-             file="./Berichte/Codebook/Codebook_Rawdata.tex"
+             print.results=F
              ) 
+
+con <- "./Berichte/Codebook/D_Codebook_Rawdata.tex"
+writeLines(c(head, table, "\\end{longtable}"), con=con)

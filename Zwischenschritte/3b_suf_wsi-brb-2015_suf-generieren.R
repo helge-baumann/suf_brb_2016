@@ -412,7 +412,7 @@ print.xtable(Gen_tex,
              booktabs=T,
              hline.after=midrules,
              include.colnames=F, 
-             file="./Berichte/Codebook/Generierte_Variablen.tex"
+             file="./Berichte/Codebook/E1_Generierte_Variablen.tex"
 ) 
 
 
