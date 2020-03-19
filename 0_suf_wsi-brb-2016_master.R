@@ -12,12 +12,12 @@ starttime <- Sys.time()
 if(!"pacman" %in% installed.packages()) install.packages("pacman")
 library(pacman)
 p_load("stringr", "xtable", "dplyr", "haven", "stringi", "filesstrings", 
-       "tools", "pdftools") 
+       "tools", "pdftools", "readODS") 
 
 source("./R_Funk/funktionen_suf.R", encoding="UTF-8")
 
 # Schritte in ./Zwischenschritte ausführen--------------------------------------
-n <- 1:6
+n <- 1:3
 sapply(dir("./Zwischenschritte", full.names=T)[n], source, encoding="UTF-8")
 
 # SessionInfo erzeugen ---------------------------------------------------------
