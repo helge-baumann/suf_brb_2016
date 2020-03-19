@@ -181,7 +181,10 @@ for(i in 1:ncol(rawdat)) {
 
 # Unterstriche einführen
 # Unterstriche einführen, Silbentrennung----
-Codebook_Rawdata <- data.frame(lapply(Codebook_Rawdata, str_replace_all, fixed("_"), "\\_"))
+Codebook_Rawdata <- 
+  data.frame(lapply(Codebook_Rawdata, str_replace_all, fixed("_"), "\\_"))
+Codebook_Rawdata <- 
+  data.frame(lapply(Codebook_Rawdata, str_replace_all, fixed("%"), "\\%"))
 
 Codebook_Rawdata[,1] <- 
   str_replace(Codebook_Rawdata[,1], "Interviewdauer", "Interview\\-dauer")

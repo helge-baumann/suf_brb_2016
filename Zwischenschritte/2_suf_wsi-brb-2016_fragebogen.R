@@ -1,10 +1,14 @@
 # Fragebogen einlesen (von Word als .txt, danach bearbeitet)--------------------
-options(encoding="Windows-1252")
+#options(encoding="Windows-1252")
 fb <- readLines(
   "./Input/Fragebogen/Fragebogen_Betriebsrätebefragung_2016_text.txt")
 fb <- stri_enc_toutf8(fb)
 options(encoding="UTF-8")
 fb <- str_replace_all(fb, "\t", " ")
+fb <- str_replace_all(fb, "\\s{2,10}", " ")
+fb <- str_replace_all(fb, "\\%", "\\\\%")
+fb <- str_replace_all(fb, "==", "=")
+fb <- str_replace_all(fb, "glqq", "glqq ")
 
 fragen <- unique(na.omit(str_extract(fb, "^[A-Z][0-9][[:alnum:]\\_]*")))
 
@@ -22,7 +26,7 @@ fb_df <- data.frame(Frage = character(length=length(fb)),
 
 # Split am ersten Doppelpunkt
 fb_df[,1] <- str_extract(fb, "[^:]+:")
-fb_df[,2] <- str_remove(fb, "[^:]+: ")
+fb_df[,2] <- str_remove(str_remove(fb, "[^:]+: "), "^.:")
 
 # reiner Text (fett drucken)
 rt <- is.na(fb_df[,1]) & fb_df[,2] != ""
@@ -144,7 +148,7 @@ head <- paste(
     rep("\\midrule", 2), "\\endfirsthead", "\\toprule",
     "\\textbf{Schlüssel} & \\textbf{Text / Anweisung}  & \\textbf{Variablen} \\\\ ",
     rep("\\midrule", 2), "\\endhead", rep("\\midrule", 2),
-    paste0("\\multicolumn{1}{l}{} & \\multicolumn{2}{l}{\\textcolor{red}{",
+    paste0("\\multicolumn{1}{l}{Erläuterung:} & \\multicolumn{2}{l}{\\textcolor{red}{",
            "\\glqq INT\\grqq\\xspace = Interviewerhinweis/-anweisung}} \\\\"),
     paste0("\\multicolumn{1}{l}{} &	\\multicolumn{2}{l}{\\textcolor{red}{",
            "\\glqq PROG/WENN\\grqq\\xspace = Programmierhinweis/Filterführung}}",

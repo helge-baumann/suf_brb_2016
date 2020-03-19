@@ -1,7 +1,7 @@
 ############
 # Masterfile zur Erzeugung eines SUF der WSI-Betriebsraetebefragung 2016
 # Ersteller: Helge Emmler, WSI
-# Letztes Update: 17.03.2020
+# Letztes Update: 19.03.2020
 ############
 
 starttime <- Sys.time()
@@ -24,10 +24,8 @@ sapply(dir("./Zwischenschritte", full.names=T)[n], source, encoding="UTF-8")
 dir.create("./sessionInfo", showWarnings=F)
 writeLines(
   capture.output(sessionInfo()), 
-  paste0(
-    "./sessionInfo/",
-    format(Sys.time(), "%Y-%m-%d_%H%M%S"),
-    "_sessionInfo.txt")
+  paste0("./sessionInfo/", format(Sys.time(), "%Y-%m-%d_%H%M%S"),
+         "_sessionInfo.txt")
 )
 
 # Ältere Dateien verschieben----------------------------------------------------

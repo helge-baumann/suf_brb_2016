@@ -95,3 +95,38 @@ get.lk <- function(x, y, value) {
   return(all(is.na(x[y==value])==T))
   
 }
+
+# Missings umdefinieren (negative Werte) ----
+
+replace_missings <- function(x, 
+                             verw = "verweigert", 
+                             wn = "weiß nicht", 
+                             tnz = "trifft nicht zu|tnz",
+                             langkurz = NULL, langkurzwert = NULL) {
+  
+  vals <- attributes(x)$labels
+  labs <- tolower(names(vals))
+  v <- vals[labs == verw]
+  w <- vals[labs == wn]
+  if(!(T %in% str_detect(labs, "trifft zu"))) t <- vals[labs == tnz]
+  
+  if(!is.null(langkurz)) check <- !(F %in% is.na(x[langkurz == langkurzwert]))
+  
+  if(identical(check == T, T)) x[langkurz == langkurzwert] <- -4
+  x[is.na(x)] <- -5
+  x[!is.na(x) & x == t] <- -6
+  x[!is.na(x) & x == v] <- -7
+  x[!is.na(x) & x == w] <- -8
+  
+  vals[vals == v] <- -7
+  vals[vals == w] <- -8
+  vals[vals == t] <- -6
+  vals <- c(-4, -5, vals)
+  names(vals)[vals == -5] <- "Missing durch Filterführung"
+  names(vals)[vals == -4] <- "Item in Fragebogenversion nicht erhoben"
+  
+  attributes(x)$labels <- sort(vals)
+  if(T %in% duplicated(vals)) print(attributes(x)$label)
+  return(x)
+  
+}
